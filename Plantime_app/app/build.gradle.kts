@@ -49,6 +49,12 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    // Navigation Compose for in-app navigation
+    implementation("androidx.navigation:navigation-compose:2.8.2")
+    // Coil for image loading (logos, backgrounds)
+    implementation("io.coil-kt:coil-compose:2.6.0")
+    // Material icons for top app bar / drawer
+    implementation("androidx.compose.material:material-icons-extended")
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
