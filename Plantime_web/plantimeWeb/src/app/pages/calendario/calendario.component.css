@@ -1,0 +1,13 @@
+.calendar-layout{display:grid;grid-template-columns:1.5fr 1fr;gap:1rem}
+.calendar-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:.5rem}
+.day{background:#fff;border-radius:10px;box-shadow:0 1px 6px rgba(0,0,0,.06);min-height:80px;padding:.5rem;display:flex;flex-direction:column}
+.day-number{font-weight:700}
+.dots{margin-top:auto}
+.dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--green-primary)}
+.event-list{margin:.5rem 0 0;padding-left:1.2rem}
+.event-row{display:flex;justify-content:space-between;gap:.5rem}
+
+/* Modal (reutiliza estilos similares a panel-control) */
+.modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.3)}
+.modal{position:fixed;inset:0;display:grid;place-items:center}
+.modal-card{background:#fff;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,.15);padding:1rem;min-width:300px;max-width:90vw}

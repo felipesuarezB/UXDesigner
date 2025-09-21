@@ -1,0 +1,53 @@
+<div class="container">
+  <h1 style="text-align:center;">Calendario</h1>
+
+  <div class="calendar-layout">
+    <div class="calendar card">
+      <div class="calendar-grid">
+        <div class="day" *ngFor="let d of [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30]">
+          <div class="day-number">{{ d }}</div>
+          <div class="dots">
+            <span class="dot" *ngIf="hasEventOnDay(d)"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="events card">
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <h3>Eventos programados</h3>
+        <button class="btn btn-primary" (click)="abrirModal()">Agregar evento</button>
+      </div>
+      <ul class="event-list">
+        <li *ngFor="let e of state.eventos()">
+          <div class="event-row">
+            <div class="event-name">{{ e.nombre }}</div>
+            <div class="event-dates">{{ e.inicio }} → {{ e.fin }}</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Modal agregar evento -->
+  <div class="modal-backdrop" *ngIf="showEventoModal" (click)="cerrarModal()"></div>
+  <div class="modal" *ngIf="showEventoModal">
+    <div class="modal-card">
+      <h3>Agregar evento</h3>
+      <label style="display:block;margin-top:.5rem">Nombre del evento</label>
+      <input [(ngModel)]="nombre" placeholder="Ej: Riego Aloe" style="width:100%;padding:.6rem;border:1px solid #eee;border-radius:8px;" />
+
+      <label style="display:block;margin-top:.5rem">Fecha inicio</label>
+      <input type="date" [(ngModel)]="inicio" style="width:100%;padding:.6rem;border:1px solid #eee;border-radius:8px;" />
+
+      <label style="display:block;margin-top:.5rem">Fecha fin</label>
+      <input type="date" [(ngModel)]="fin" style="width:100%;padding:.6rem;border:1px solid #eee;border-radius:8px;" />
+
+      <div style="display:flex; gap:.5rem; justify-content:flex-end; margin-top: .75rem;">
+        <button class="btn btn-primary" (click)="agregarEvento()">Agregar</button>
+        <button class="btn btn-secondary" (click)="cerrarModal()">Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>
+

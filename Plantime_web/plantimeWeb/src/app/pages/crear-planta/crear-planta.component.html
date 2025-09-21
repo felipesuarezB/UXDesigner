@@ -1,0 +1,52 @@
+<div class="container">
+  <h1>Configuración de planta</h1>
+  <form class="grid" style="grid-template-columns: 1fr 1fr;">
+    <div class="card">
+      <h3>Selecciona un ícono</h3>
+      <div class="grid" style="grid-template-columns: repeat(4, 1fr);">
+        <button type="button" class="btn btn-secondary">🌿</button>
+        <button type="button" class="btn btn-secondary">🌱</button>
+        <button type="button" class="btn btn-secondary">🌵</button>
+        <button type="button" class="btn btn-secondary">🌼</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <label>Selecciona un sensor</label>
+      <select style="padding:0.6rem;border-radius:8px;width:100%">
+        <option>Patio</option>
+        <option>Cocina</option>
+        <option>Habitación</option>
+      </select>
+
+      <label style="margin-top:1rem;display:block">Nombre de planta</label>
+      <input type="text" style="padding:0.6rem;border-radius:8px;width:100%" placeholder="Ej: Aloe Vera" />
+
+      <label style="margin-top:1rem;display:block">Temperatura</label>
+      <select style="padding:0.6rem;border-radius:8px;width:100%">
+        <option>Baja</option>
+        <option>Media</option>
+        <option>Alta</option>
+      </select>
+
+      <label style="margin-top:1rem;display:block">Humedad</label>
+      <select style="padding:0.6rem;border-radius:8px;width:100%">
+        <option>Baja</option>
+        <option>Media</option>
+        <option>Alta</option>
+      </select>
+
+      <label style="margin-top:1rem;display:block">Luz</label>
+      <select style="padding:0.6rem;border-radius:8px;width:100%">
+        <option>Baja</option>
+        <option>Media</option>
+        <option>Alta</option>
+      </select>
+
+      <div style="display:flex; gap: .5rem; margin-top:1rem;">
+        <button type="button" class="btn btn-primary">Crear</button>
+        <button type="button" (click)="cancelar()" class="btn btn-secondary">Cancelar</button>
+      </div>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,56 @@
+<div class="container">
+  <h1>Panel de control</h1>
+
+  <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));">
+    <div class="card">
+      <h3>Modo viaje</h3>
+      <button class="btn" [class.btn-primary]="!modoViaje" [class.btn-secondary]="modoViaje" (click)="toggleViaje()">
+        {{ modoViaje ? 'ON' : 'OFF' }}
+      </button>
+    </div>
+
+    <div class="card">
+      <h3>Modo tranquilidad</h3>
+      <div class="muted" style="font-size:.9rem;margin-bottom:.5rem;">permite bloquear las notificaciones</div>
+      <button class="btn" [class.btn-primary]="!modoTranquilidad" [class.btn-secondary]="modoTranquilidad" (click)="toggleTranquilidad()">
+        {{ modoTranquilidad ? 'ON' : 'OFF' }}
+      </button>
+    </div>
+
+    <div class="card">
+      <h3>Compartir cuentas</h3>
+      <div style="display:flex; gap:.5rem;">
+        <input [(ngModel)]="compartirUsuario" placeholder="Usuario" style="flex:1;padding:.6rem;border-radius:8px;border:1px solid #eee" />
+        <button class="btn btn-primary" (click)="compartirCuenta()">Compartir</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div style="display:flex; align-items:center; justify-content:space-between;">
+        <h3>Sensores</h3>
+        <button class="btn btn-primary" (click)="abrirModalSensor()">Agregar sensor</button>
+      </div>
+      <ul class="sensor-list">
+        <li *ngFor="let s of state.sensores()">{{ s.nombre }}</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>Calendario</h3>
+      <a class="btn btn-primary" routerLink="/panel-control/calendario">Ir al calendario</a>
+    </div>
+  </div>
+
+  <!-- Modal agregar sensor -->
+  <div class="modal-backdrop" *ngIf="showSensorModal" (click)="cerrarModalSensor()"></div>
+  <div class="modal" *ngIf="showSensorModal">
+    <div class="modal-card">
+      <h3>Agregar sensor</h3>
+      <input [(ngModel)]="nuevoSensorNombre" placeholder="Nombre del sensor" style="width:100%;padding:.6rem;border:1px solid #eee;border-radius:8px;margin: .75rem 0;" />
+      <div style="display:flex; gap:.5rem; justify-content:flex-end;">
+        <button class="btn btn-primary" (click)="agregarSensor()">Agregar</button>
+        <button class="btn btn-secondary" (click)="cerrarModalSensor()">Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>

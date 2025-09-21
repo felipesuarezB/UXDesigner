@@ -1,0 +1,25 @@
+<div class="container">
+  <h1>Comunidad</h1>
+  <div class="two-col">
+    <div class="col-left card">
+      <h3>Comentarios</h3>
+      <div *ngIf="!temaSeleccionado" class="muted">Selecciona un tema a la derecha</div>
+      <div *ngIf="temaSeleccionado">
+        <h4>{{ temaSeleccionado }}</h4>
+        <ul>
+          <li *ngFor="let c of comentarios[temaSeleccionado]">{{ c }}</li>
+        </ul>
+        <div style="display:flex; gap:.5rem; margin-top:.5rem;">
+          <input [(ngModel)]="nuevoComentario" placeholder="Agrega tu comentario" style="flex:1;padding:.6rem;border-radius:8px;border:1px solid #eee" />
+          <button class="btn btn-primary" (click)="agregarComentario()">Agregar</button>
+        </div>
+      </div>
+    </div>
+    <div class="col-right card">
+      <h3>Temas de interés</h3>
+      <div class="temas">
+        <button class="btn btn-secondary" *ngFor="let t of temas" (click)="seleccionarTema(t)">{{ t }}</button>
+      </div>
+    </div>
+  </div>
+</div>
