@@ -92,12 +92,28 @@ h1, h2, h3, h4, h5, h6 {
 
 .plant-bg-left {
   left: 0;
-  background-image: url('/assets/images/plantleft.png');
+  background-image: url('./assets/images/plantright.png');
 }
 
 .plant-bg-right {
   right: 0;
-  background-image: url('/assets/images/plantright.png');
+  background-image: url('./assets/images/plantleft.png');
+}
+
+.plant-bg-center {
+  position: fixed;
+  left: 50%;
+  bottom: 10vh;
+  transform: translateX(-50%);
+  width: min(30vw, 900px);
+  height: 70vh;
+  background-repeat: no-repeat;
+  background-position: bottom center;
+  background-size: contain;
+  background-image: url('./assets/images/plantcenter.png');
+  pointer-events: none;
+  opacity: 0.98;
+  z-index: 0;
 }
 
 /* Responsive tweaks: reduce size on small screens */
