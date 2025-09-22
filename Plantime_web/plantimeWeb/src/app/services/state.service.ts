@@ -16,7 +16,8 @@ export interface EventoCalendario {
   id: number;
   nombre: string;
   inicio: string; // ISO date
-  fin: string;    // ISO date
+  hora: string;   // HH:mm
+  duracion: number; // minutos
 }
 
 @Injectable({ providedIn: 'root' })
@@ -33,7 +34,7 @@ export class StateService {
   ]);
 
   eventos = signal<EventoCalendario[]>([
-    { id: 1, nombre: 'Riego Aloe', inicio: new Date().toISOString().slice(0,10), fin: new Date().toISOString().slice(0,10) },
+    { id: 1, nombre: 'Riego Aloe', inicio: new Date().toISOString().slice(0,10), hora: '08:00', duracion: 30 },
   ]);
 
   private sensorId = 100;
@@ -44,8 +45,8 @@ export class StateService {
     this.sensores.update(list => [...list, nuevo]);
   }
 
-  agregarEvento(nombre: string, inicio: string, fin: string) {
-    const nuevo = { id: ++this.eventoId, nombre, inicio, fin };
+  agregarEvento(nombre: string, inicio: string, hora: string, duracion: number) {
+    const nuevo = { id: ++this.eventoId, nombre, inicio, hora, duracion };
     this.eventos.update(list => [...list, nuevo]);
   }
 }

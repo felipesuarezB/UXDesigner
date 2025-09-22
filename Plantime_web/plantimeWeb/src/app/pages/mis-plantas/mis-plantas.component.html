@@ -6,39 +6,39 @@
   </div>
 
   <section class="grid" style="grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));">
-    <div class="card">
+    <div class="card" *ngFor="let planta of plantas">
       <div style="display:flex; align-items:center; gap:.5rem;">
-        <div style="font-size:1.6rem;">🌿</div>
+        <div style="font-size:1.6rem;">{{ planta.icono }}</div>
         <div>
-          <h3>Aloe Vera</h3>
-          <div class="muted">Sensor: Patio</div>
+          <h3>{{ planta.nombre }}</h3>
+          <div class="muted">Sensor: {{ planta.sensor }}</div>
         </div>
       </div>
       <div style="display:flex; gap:.5rem; flex-wrap:wrap; margin-top:.75rem;">
         <button class="btn btn-secondary" type="button">Alarma</button>
-        <button class="btn btn-secondary" type="button">Checklist</button>
+        <button class="btn btn-secondary" type="button" (click)="abrirNotas(planta.nombre)">Checklist</button>
         <button class="btn btn-secondary" type="button">Configuración</button>
-        <button class="btn btn-secondary" type="button">Temperatura</button>
-        <button class="btn btn-secondary" type="button">Humedad</button>
-        <button class="btn btn-secondary" type="button">Luz</button>
-      </div>
-    </div>
-    <div class="card">
-      <div style="display:flex; align-items:center; gap:.5rem;">
-        <div style="font-size:1.6rem;">🌱</div>
-        <div>
-          <h3>Hierbabuena</h3>
-          <div class="muted">Sensor: Cocina</div>
-        </div>
-      </div>
-      <div style="display:flex; gap:.5rem; flex-wrap:wrap; margin-top:.75rem;">
-        <button class="btn btn-secondary" type="button">Alarma</button>
-        <button class="btn btn-secondary" type="button">Checklist</button>
-        <button class="btn btn-secondary" type="button">Configuración</button>
-        <button class="btn btn-secondary" type="button">Temperatura</button>
-        <button class="btn btn-secondary" type="button">Humedad</button>
-        <button class="btn btn-secondary" type="button">Luz</button>
+        <button class="btn" [ngClass]="{'btn-toggle-on': toggles[planta.nombre].temperatura, 'btn-toggle-off': !toggles[planta.nombre].temperatura}" (click)="toggle(planta.nombre, 'temperatura')">Temperatura</button>
+        <button class="btn" [ngClass]="{'btn-toggle-on': toggles[planta.nombre].humedad, 'btn-toggle-off': !toggles[planta.nombre].humedad}" (click)="toggle(planta.nombre, 'humedad')">Humedad</button>
+        <button class="btn" [ngClass]="{'btn-toggle-on': toggles[planta.nombre].luz, 'btn-toggle-off': !toggles[planta.nombre].luz}" (click)="toggle(planta.nombre, 'luz')">Luz</button>
       </div>
     </div>
   </section>
-</div>
+
+  <!-- Modal de notas -->
+  <div class="modal-backdrop" *ngIf="showNotasModal" (click)="cerrarNotas()"></div>
+  <div class="modal" *ngIf="showNotasModal">
+    <div class="modal-card">
+      <h3>Notas de {{ showNotasModal }}</h3>
+      <ul>
+        <li *ngFor="let nota of notas[showNotasModal]; let i = index">
+          {{ nota }} <button (click)="eliminarNota(showNotasModal, i)" style="color:red;background:none;border:none;cursor:pointer;">Eliminar</button>
+        </li>
+      </ul>
+      <input [(ngModel)]="nuevaNota" placeholder="Agregar nota..." style="width:100%;padding:.5rem;margin-top:.5rem;" />
+      <div style="display:flex; gap:.5rem; justify-content:flex-end; margin-top: .75rem;">
+        <button class="btn btn-primary" (click)="agregarNota(showNotasModal)">Agregar</button>
+        <button class="btn btn-secondary" (click)="cerrarNotas()">Cerrar</button>
+      </div>
+    </div>
+  </div></div>
