@@ -27,6 +27,11 @@ export class MisPlantasComponent {
   ];
   toggles: { [planta: string]: PlantaToggles } = {};
   notas: PlantaNotas = {};
+  showAlarmaModal: string|null = null;
+  alarmaFecha: string = '';
+  alarmaHora: string = '';
+  alarmaDescripcion: string = '';
+  alarmas: { [planta: string]: { fecha: string, hora: string, descripcion: string }[] } = {};
   showNotasModal: string|null = null;
   nuevaNota: string = '';
 
@@ -34,6 +39,7 @@ export class MisPlantasComponent {
     this.plantas.forEach(p => {
       this.toggles[p.nombre] = { temperatura: false, humedad: false, luz: false };
       this.notas[p.nombre] = [];
+      this.alarmas[p.nombre] = [];
     });
   }
 
@@ -60,5 +66,30 @@ export class MisPlantasComponent {
 
   eliminarNota(planta: string, idx: number) {
     this.notas[planta].splice(idx, 1);
+  }
+
+  abrirAlarma(planta: string) {
+    this.showAlarmaModal = planta;
+    this.alarmaFecha = '';
+    this.alarmaHora = '';
+    this.alarmaDescripcion = '';
+  }
+
+  cerrarAlarma() {
+    this.showAlarmaModal = null;
+    this.alarmaFecha = '';
+    this.alarmaHora = '';
+    this.alarmaDescripcion = '';
+  }
+
+  guardarAlarma(planta: string) {
+    if (this.alarmaFecha && this.alarmaHora && this.alarmaDescripcion.trim()) {
+      this.alarmas[planta].push({
+        fecha: this.alarmaFecha,
+        hora: this.alarmaHora,
+        descripcion: this.alarmaDescripcion.trim()
+      });
+      this.cerrarAlarma();
+    }
   }
 }

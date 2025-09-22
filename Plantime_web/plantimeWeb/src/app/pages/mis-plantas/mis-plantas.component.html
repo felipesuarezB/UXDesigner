@@ -15,7 +15,7 @@
         </div>
       </div>
       <div style="display:flex; gap:.5rem; flex-wrap:wrap; margin-top:.75rem;">
-        <button class="btn btn-secondary" type="button">Alarma</button>
+        <button class="btn btn-secondary" type="button" (click)="abrirAlarma(planta.nombre)">Alarma</button>
         <button class="btn btn-secondary" type="button" (click)="abrirNotas(planta.nombre)">Checklist</button>
         <button class="btn btn-secondary" type="button">Configuración</button>
         <button class="btn" [ngClass]="{'btn-toggle-on': toggles[planta.nombre].temperatura, 'btn-toggle-off': !toggles[planta.nombre].temperatura}" (click)="toggle(planta.nombre, 'temperatura')">Temperatura</button>
@@ -39,6 +39,30 @@
       <div style="display:flex; gap:.5rem; justify-content:flex-end; margin-top: .75rem;">
         <button class="btn btn-primary" (click)="agregarNota(showNotasModal)">Agregar</button>
         <button class="btn btn-secondary" (click)="cerrarNotas()">Cerrar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de alarma -->
+  <div class="modal-backdrop" *ngIf="showAlarmaModal" (click)="cerrarAlarma()"></div>
+  <div class="modal" *ngIf="showAlarmaModal">
+    <div class="modal-card">
+      <h3>Asignar alarma a {{ showAlarmaModal }}</h3>
+      <ul *ngIf="alarmas[showAlarmaModal]?.length">
+        <li *ngFor="let alarma of alarmas[showAlarmaModal]; let i = index">
+          {{ alarma.fecha }} {{ alarma.hora }} - {{ alarma.descripcion }}
+          <button (click)="alarmas[showAlarmaModal].splice(i, 1)" style="color:red;background:none;border:none;cursor:pointer;">Eliminar</button>
+        </li>
+      </ul>
+      <label style="display:block;margin-top:.5rem">Fecha</label>
+      <input type="date" [(ngModel)]="alarmaFecha" style="width:100%;padding:.6rem;border:1px solid #eee;border-radius:8px;" />
+      <label style="display:block;margin-top:.5rem">Hora</label>
+      <input type="time" [(ngModel)]="alarmaHora" style="width:100%;padding:.6rem;border:1px solid #eee;border-radius:8px;" />
+      <label style="display:block;margin-top:.5rem">Descripción</label>
+      <input [(ngModel)]="alarmaDescripcion" placeholder="Ej: Revisar riego" style="width:100%;padding:.6rem;border:1px solid #eee;border-radius:8px;" />
+      <div style="display:flex; gap:.5rem; justify-content:flex-end; margin-top: .75rem;">
+        <button class="btn btn-primary" (click)="guardarAlarma(showAlarmaModal)">Guardar</button>
+        <button class="btn btn-secondary" (click)="cerrarAlarma()">Cerrar</button>
       </div>
     </div>
   </div></div>
