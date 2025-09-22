@@ -16,7 +16,41 @@ export class CalendarioComponent {
   inicio = '';
   fin = '';
 
-  constructor(public state: StateService) {}
+  mesActual: string;
+  anioActual: number;
+  mesIndex: number;
+  diasDelMes: number[] = [];
+
+  meses = [
+    'enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio',
+    'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'
+  ];
+
+  constructor(public state: StateService) {
+    const fecha = new Date();
+    this.mesIndex = fecha.getMonth();
+    this.anioActual = fecha.getFullYear();
+    this.mesActual = this.meses[this.mesIndex];
+    this.actualizarDiasDelMes();
+  }
+
+  cambiarMes(delta: number) {
+    this.mesIndex += delta;
+    if (this.mesIndex < 0) {
+      this.mesIndex = 11;
+      this.anioActual--;
+    } else if (this.mesIndex > 11) {
+      this.mesIndex = 0;
+      this.anioActual++;
+    }
+    this.mesActual = this.meses[this.mesIndex];
+    this.actualizarDiasDelMes();
+  }
+
+  actualizarDiasDelMes() {
+    const dias = new Date(this.anioActual, this.mesIndex + 1, 0).getDate();
+    this.diasDelMes = Array.from({length: dias}, (_, i) => i + 1);
+  }
 
   abrirModal() { this.showEventoModal = true; }
   cerrarModal() { this.showEventoModal = false; this.nombre=''; this.inicio=''; this.fin=''; }
