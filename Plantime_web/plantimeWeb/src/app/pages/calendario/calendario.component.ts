@@ -14,7 +14,8 @@ export class CalendarioComponent {
   showEventoModal = false;
   nombre = '';
   inicio = '';
-  fin = '';
+  hora = '';
+  duracion: number|null = null;
 
   mesActual: string;
   anioActual: number;
@@ -53,10 +54,10 @@ export class CalendarioComponent {
   }
 
   abrirModal() { this.showEventoModal = true; }
-  cerrarModal() { this.showEventoModal = false; this.nombre=''; this.inicio=''; this.fin=''; }
+  cerrarModal() { this.showEventoModal = false; this.nombre=''; this.inicio=''; this.hora=''; this.duracion=null; }
   agregarEvento() {
-    if (!this.nombre.trim() || !this.inicio || !this.fin) return;
-    this.state.agregarEvento(this.nombre.trim(), this.inicio, this.fin);
+    if (!this.nombre.trim() || !this.inicio || !this.hora || !this.duracion) return;
+    this.state.agregarEvento(this.nombre.trim(), this.inicio, this.hora, this.duracion);
     this.cerrarModal();
   }
 

@@ -1,1 +1,12 @@
 .muted{opacity:.7}
+
+.btn-toggle-on {
+  background: #66BF45 !important;
+  color: #fff !important;
+  border: 1.5px solid #4f8b2a;
+}
+.btn-toggle-off {
+  background: #e6f7df !important;
+  color: #477702 !important;
+  border: 1.5px solid #b2d8a6;
+}

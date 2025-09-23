@@ -23,8 +23,8 @@ export class LoginComponent {
       return;
     }
 
-    // Redirigir al dashboard o página principal
-    this.router.navigate(['/dashboard']);
+    // Redirigir al menú de mis plantas
+    this.router.navigate(['/mis-plantas']);
   }
 
   goToRegister() {
