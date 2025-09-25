@@ -12,6 +12,8 @@ import com.example.plantimeapp.ui.screens.ComunidadScreen
 import com.example.plantimeapp.ui.screens.HistorialScreen
 import com.example.plantimeapp.ui.screens.PanelControlScreen
 import com.example.plantimeapp.ui.screens.CrearPlantaScreen
+import com.example.plantimeapp.ui.screens.EstadisticasScreen
+import com.example.plantimeapp.ui.screens.CalendarioScreen
 import com.example.plantimeapp.ui.components.AppScaffold
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.compose.runtime.getValue
@@ -68,7 +70,19 @@ fun AppNavGraph(navController: NavHostController) {
             AppScaffold(
                 currentRoute = currentRoute,
                 onNavigate = { route -> if (route.route != currentRoute) navController.navigate(route.route) }
-            ) { MisPlantasScreen() }
+            ) {
+                MisPlantasScreen(
+                    onGoCalendario = { navController.navigate(NavRoute.Calendario.route) },
+                    onGoEstadisticas = { navController.navigate(NavRoute.Estadisticas.route) },
+                    onGoCrearPlanta = { navController.navigate(NavRoute.CrearPlanta.route) }
+                )
+            }
+        }
+        composable(NavRoute.Estadisticas.route) {
+            AppScaffold(
+                currentRoute = currentRoute,
+                onNavigate = { route -> if (route.route != currentRoute) navController.navigate(route.route) }
+            ) { EstadisticasScreen() }
         }
         composable(NavRoute.Comunidad.route) {
             AppScaffold(
@@ -86,7 +100,13 @@ fun AppNavGraph(navController: NavHostController) {
             AppScaffold(
                 currentRoute = currentRoute,
                 onNavigate = { route -> if (route.route != currentRoute) navController.navigate(route.route) }
-            ) { PanelControlScreen() }
+            ) { PanelControlScreen(onGoCalendario = { navController.navigate(NavRoute.Calendario.route) }) }
+        }
+        composable(NavRoute.Calendario.route) {
+            AppScaffold(
+                currentRoute = currentRoute,
+                onNavigate = { route -> if (route.route != currentRoute) navController.navigate(route.route) }
+            ) { CalendarioScreen() }
         }
         composable(NavRoute.CrearPlanta.route) {
             AppScaffold(

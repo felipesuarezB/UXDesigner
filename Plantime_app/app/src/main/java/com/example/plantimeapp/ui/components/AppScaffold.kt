@@ -7,12 +7,13 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.unit.dp
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
 import com.example.plantimeapp.navigation.NavRoute
 import kotlinx.coroutines.launch
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AppScaffold(
     currentRoute: String,
@@ -69,7 +70,7 @@ fun AppScaffold(
     ) {
         Scaffold(
             topBar = {
-                SmallTopAppBar(
+                CenterAlignedTopAppBar(
                     title = { Text("PlanTime") },
                     navigationIcon = {
                         IconButton(onClick = { scope.launch { drawerState.open() } }) {
@@ -89,3 +90,4 @@ fun AppScaffold(
         }
     }
 }
+
