@@ -114,6 +114,12 @@ fun AppNavGraph(navController: NavHostController) {
                 onNavigate = { route -> if (route.route != currentRoute) navController.navigate(route.route) }
             ) { com.example.plantimeapp.ui.screens.ConfigAlarmasScreen() }
         }
+        composable(NavRoute.Calendario.route) {
+            AppScaffold(
+                currentRoute = currentRoute,
+                onNavigate = { route -> if (route.route != currentRoute) navController.navigate(route.route) }
+            ) { CalendarioScreen() }
+        }
         composable(NavRoute.CrearPlanta.route) {
             AppScaffold(
                 currentRoute = currentRoute,
