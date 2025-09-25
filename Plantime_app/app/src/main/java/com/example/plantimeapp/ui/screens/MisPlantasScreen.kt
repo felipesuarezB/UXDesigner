@@ -12,11 +12,14 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.Switch
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.foundation.clickable
 import com.example.plantimeapp.ui.theme.GreenDark
 import com.example.plantimeapp.ui.theme.GreenPrimary
 
@@ -51,16 +54,18 @@ fun MisPlantasScreen(
     var nuevaNota by remember { mutableStateOf("") }
 
     // Alarmas por planta
-    data class Alarma(val fecha: String, val hora: String, val descripcion: String)
+    data class Alarma(val planta: String, val fecha: String, val hora: String, val descripcion: String)
     val alarmas: MutableMap<String, MutableList<Alarma>> = remember {
         mutableStateMapOf<String, MutableList<Alarma>>().apply {
             plantas.forEach { this[it.nombre] = mutableStateListOf<Alarma>() }
         }
     }
     var showAlarmaPlanta by remember { mutableStateOf<String?>(null) }
+    var alarmaPlanta by remember { mutableStateOf(plantas.first().nombre) }
     var alarmaFecha by remember { mutableStateOf("") }
     var alarmaHora by remember { mutableStateOf("") }
     var alarmaDescripcion by remember { mutableStateOf("") }
+    var expandedPlanta by remember { mutableStateOf(false) }
 
     Column(
         modifier = Modifier
@@ -156,7 +161,7 @@ fun MisPlantasScreen(
             confirmButton = {
                 TextButton(onClick = {
                     if (alarmaFecha.isNotBlank() && alarmaHora.isNotBlank() && alarmaDescripcion.isNotBlank()) {
-                        alarmas[planta]?.add(Alarma(alarmaFecha, alarmaHora, alarmaDescripcion))
+                        alarmas[planta]?.add(Alarma(alarmaPlanta, alarmaFecha, alarmaHora, alarmaDescripcion))
                         showAlarmaPlanta = null
                         alarmaFecha = ""; alarmaHora = ""; alarmaDescripcion = ""
                     }
@@ -174,6 +179,30 @@ fun MisPlantasScreen(
                                     Text("${'$'}{a.fecha} ${'$'}{a.hora} - ${'$'}{a.descripcion}")
                                     TextButton(onClick = { list.removeAt(idx) }) { Text("Eliminar", color = MaterialTheme.colorScheme.error) }
                                 }
+                            }
+                        }
+                    }
+                    // Selector de planta
+                    Box {
+                        OutlinedTextField(
+                            value = alarmaPlanta,
+                            onValueChange = {},
+                            label = { Text("Asignar a planta") },
+                            modifier = Modifier.fillMaxWidth().clickable { expandedPlanta = true },
+                            readOnly = true
+                        )
+                        DropdownMenu(
+                            expanded = expandedPlanta,
+                            onDismissRequest = { expandedPlanta = false }
+                        ) {
+                            plantas.forEach { pl ->
+                                DropdownMenuItem(
+                                    text = { Text(pl.nombre) },
+                                    onClick = {
+                                        alarmaPlanta = pl.nombre
+                                        expandedPlanta = false
+                                    }
+                                )
                             }
                         }
                     }
