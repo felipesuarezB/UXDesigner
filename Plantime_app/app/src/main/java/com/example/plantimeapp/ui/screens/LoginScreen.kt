@@ -94,7 +94,7 @@ fun LoginScreen(
 @Composable
 private fun BoxScope.DecorativePlants() {
     // Try to render drawables if present; otherwise render subtle gradients
-    val leftPainter = runCatching { painterResource(id = R.drawable.plantleft) }.getOrNull()
+    val leftPainter = null // Drawable 'plantleft' no existe, usar null para mostrar Box placeholder
     val rightPainter = null // Drawable 'plantright' no existe, usar null para mostrar Box placeholder
 
     if (leftPainter != null) {
