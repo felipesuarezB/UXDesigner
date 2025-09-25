@@ -12,4 +12,5 @@ sealed class NavRoute(val route: String) {
     data object PanelControl : NavRoute("panel-control")
     data object Calendario : NavRoute("panel-control/calendario")
     data object CrearPlanta : NavRoute("crear-planta")
+    data object ConfigAlarmas : NavRoute("config-alarmas")
 }

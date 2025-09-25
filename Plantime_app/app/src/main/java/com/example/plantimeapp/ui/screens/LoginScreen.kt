@@ -37,13 +37,14 @@ fun LoginScreen(
                 .padding(top = 48.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            // Logo (optional)
-            Text(
-                text = "PlanTime",
-                fontSize = 36.sp,
-                fontWeight = FontWeight.Bold,
-                color = GreenPrimary,
-                modifier = Modifier.padding(bottom = 24.dp)
+            // Logo gráfico
+            Image(
+                painter = painterResource(id = R.drawable.logo),
+                contentDescription = "Logo PlanTime",
+                modifier = Modifier
+                    .height(100.dp)
+                    .padding(bottom = 24.dp),
+                contentScale = ContentScale.Fit
             )
 
             var user by remember { mutableStateOf("") }
@@ -85,8 +86,65 @@ fun LoginScreen(
                     .height(48.dp),
                 shape = RoundedCornerShape(10.dp)
             ) { Text("Registrarse") }
+            Spacer(Modifier.height(32.dp))
+            Image(
+                painter = painterResource(id = R.drawable.inicio),
+                contentDescription = "Imagen de inicio",
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(220.dp)
+                    .align(Alignment.CenterHorizontally),
+                contentScale = ContentScale.Crop
+            )
         }
     }
 }
 
+@Composable
+private fun BoxScope.DecorativePlants() {
+    // Try to render drawables if present; otherwise render subtle gradients
+    val leftPainter = null // Drawable 'plantleft' no existe, usar null para mostrar Box placeholder
+    val rightPainter = null // Drawable 'plantright' no existe, usar null para mostrar Box placeholder
 
+    if (leftPainter != null) {
+        Image(
+            painter = leftPainter,
+            contentDescription = null,
+            modifier = Modifier
+                .fillMaxHeight(0.7f)
+                .width(160.dp)
+                .align(Alignment.BottomStart),
+            contentScale = ContentScale.Fit,
+            alpha = 0.95f
+        )
+    } else {
+        Box(
+            modifier = Modifier
+                .fillMaxHeight(0.6f)
+                .width(120.dp)
+                .align(Alignment.BottomStart)
+                .background(Color(0x1166BF45), RoundedCornerShape(topEnd = 24.dp))
+        )
+    }
+
+    if (rightPainter != null) {
+        Image(
+            painter = rightPainter,
+            contentDescription = null,
+            modifier = Modifier
+                .fillMaxHeight(0.7f)
+                .width(160.dp)
+                .align(Alignment.BottomEnd),
+            contentScale = ContentScale.Fit,
+            alpha = 0.95f
+        )
+    } else {
+        Box(
+            modifier = Modifier
+                .fillMaxHeight(0.6f)
+                .width(120.dp)
+                .align(Alignment.BottomEnd)
+                .background(Color(0x1166BF45), RoundedCornerShape(topStart = 24.dp))
+        )
+    }
+}

@@ -100,13 +100,19 @@ fun AppNavGraph(navController: NavHostController) {
             AppScaffold(
                 currentRoute = currentRoute,
                 onNavigate = { route -> if (route.route != currentRoute) navController.navigate(route.route) }
-            ) { PanelControlScreen(onGoCalendario = { navController.navigate(NavRoute.Calendario.route) }) }
+            ) {
+                PanelControlScreen(
+                    onConfigAlarmas = { navController.navigate(NavRoute.ConfigAlarmas.route) },
+                    onCrearPlanta = { navController.navigate(NavRoute.CrearPlanta.route) },
+                    onConfigSensores = { /* Aquí puedes navegar a la pantalla de sensores si existe */ }
+                )
+            }
         }
-        composable(NavRoute.Calendario.route) {
+        composable(NavRoute.ConfigAlarmas.route) {
             AppScaffold(
                 currentRoute = currentRoute,
                 onNavigate = { route -> if (route.route != currentRoute) navController.navigate(route.route) }
-            ) { CalendarioScreen() }
+            ) { com.example.plantimeapp.ui.screens.ConfigAlarmasScreen() }
         }
         composable(NavRoute.CrearPlanta.route) {
             AppScaffold(
