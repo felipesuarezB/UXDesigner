@@ -28,7 +28,7 @@ fun AppNavGraph(navController: NavHostController) {
         composable(NavRoute.Login.route) {
             LoginScreen(
                 onLogin = {
-                    navController.navigate(NavRoute.Dashboard.route) {
+                    navController.navigate(NavRoute.MisPlantas.route) {
                         popUpTo(NavRoute.Login.route) { inclusive = true }
                     }
                 },
@@ -38,7 +38,7 @@ fun AppNavGraph(navController: NavHostController) {
         composable(NavRoute.Register.route) {
             RegisterScreen(
                 onRegistered = {
-                    navController.navigate(NavRoute.Dashboard.route) {
+                    navController.navigate(NavRoute.MisPlantas.route) {
                         popUpTo(NavRoute.Login.route) { inclusive = true }
                     }
                 },
@@ -47,24 +47,6 @@ fun AppNavGraph(navController: NavHostController) {
         }
 
         // Main sections (wrapped in AppScaffold)
-        composable(NavRoute.Dashboard.route) {
-            AppScaffold(
-                currentRoute = currentRoute,
-                onNavigate = { route ->
-                    if (route.route != currentRoute) navController.navigate(route.route)
-                },
-                onLogout = {
-                    navController.navigate(NavRoute.Login.route) {
-                        popUpTo(0) { inclusive = true }
-                    }
-                }
-            ) {
-                DashboardScreen(
-                    onLogout = { /* handled from drawer */ },
-                    onCreatePlant = { navController.navigate(NavRoute.CrearPlanta.route) }
-                )
-            }
-        }
 
         composable(NavRoute.MisPlantas.route) {
             AppScaffold(
