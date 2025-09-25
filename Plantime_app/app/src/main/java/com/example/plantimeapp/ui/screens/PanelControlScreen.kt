@@ -8,14 +8,30 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun PanelControlScreen() {
+fun PanelControlScreen(
+    onConfigAlarmas: () -> Unit,
+    onCrearPlanta: () -> Unit,
+    onConfigSensores: () -> Unit
+) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp)
+            .padding(16.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text("Panel de control", style = MaterialTheme.typography.headlineLarge)
-        Spacer(Modifier.height(12.dp))
-        Text("Ajustes y configuraciones de la app. (Placeholder)")
+        Text("Configuración", style = MaterialTheme.typography.headlineLarge)
+        Spacer(Modifier.height(24.dp))
+        Button(
+            onClick = onConfigAlarmas,
+            modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp)
+        ) { Text("Configuración de alarmas") }
+        Button(
+            onClick = onCrearPlanta,
+            modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp)
+        ) { Text("Creación de planta") }
+        Button(
+            onClick = onConfigSensores,
+            modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp)
+        ) { Text("Configuración de sensores") }
     }
 }
