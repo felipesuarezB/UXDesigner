@@ -23,6 +23,15 @@ fun RegisterScreen(
             .padding(top = 48.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        // Logo gráfico
+        Image(
+            painter = painterResource(id = com.example.plantimeapp.R.drawable.logo),
+            contentDescription = "Logo PlanTime",
+            modifier = Modifier
+                .height(100.dp)
+                .padding(bottom = 24.dp),
+            contentScale = ContentScale.Fit
+        )
         Text("Crear cuenta", style = MaterialTheme.typography.headlineMedium)
         Spacer(Modifier.height(16.dp))
 
@@ -74,5 +83,15 @@ fun RegisterScreen(
             shape = RoundedCornerShape(10.dp),
             colors = ButtonDefaults.outlinedButtonColors(contentColor = GreenDark)
         ) { Text("Volver al login") }
+        Spacer(Modifier.height(32.dp))
+        Image(
+            painter = painterResource(id = com.example.plantimeapp.R.drawable.inicio),
+            contentDescription = "Imagen de inicio",
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(220.dp)
+                .align(Alignment.CenterHorizontally),
+            contentScale = ContentScale.Crop
+        )
     }
 }
