@@ -14,6 +14,7 @@ import androidx.compose.material.icons.filled.Menu
 import com.example.plantimeapp.navigation.NavRoute
 import kotlinx.coroutines.launch
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AppScaffold(
     currentRoute: String,
