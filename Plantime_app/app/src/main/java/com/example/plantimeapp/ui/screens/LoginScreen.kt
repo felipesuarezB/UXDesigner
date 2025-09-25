@@ -29,8 +29,6 @@ fun LoginScreen(
     onGoToRegister: () -> Unit,
 ) {
     Box(modifier = Modifier.fillMaxSize()) {
-        // Decorative images on sides (optional if resources exist)
-        DecorativePlants()
 
         Column(
             modifier = Modifier
