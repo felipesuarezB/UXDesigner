@@ -70,18 +70,4 @@ fun AppScaffold(
         ) {
             content()
         }
-                        }
-                    }
-                )
-            }
-        ) { innerPadding ->
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(innerPadding)
-            ) {
-                content()
-            }
-        }
     }
-}
